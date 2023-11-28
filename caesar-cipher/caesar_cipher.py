@@ -14,7 +14,6 @@ if needed.
 Encrypts .txt files
 """
 
-
 def caesar_cipher_helper(sentence: list[list[str]],
                          key: int) -> list[list[str]]:
     """
@@ -26,28 +25,15 @@ def caesar_cipher_helper(sentence: list[list[str]],
     the key originally used to encrypt it...)
     """
     for lines in range(len(sentence)):
-
-        print(lines)
-
         for words in range(len(sentence[lines])):
 
             acc = ''    # <- accumulator string
             for ch in sentence[lines][words]:
-
                 if ch.isalpha() and ch.isupper():   # <- uppercase letters
                     ch = chr(((ord(ch) - ord('A') + key) % 26) + ord('A'))
                 elif ch.isalpha() and ch.islower():  # <- lowercase letters
                     ch = chr(((ord(ch) - ord('a') + key) % 26) + ord('a'))
-                """
-                elif ch.isdigit():  # <- digits 0-9
-                    ch = chr(((ord(ch) - ord('0') + key) % 10) + ord('0'))
-                elif 32 < ord(ch) < 48:  # <- chars between ascii 32-48
-                    ch = chr(((ord(ch) - ord('!') + key) % 16) + ord('!'))
-                elif 57 < ord(ch) < 65:  # <- chars between ascii 57-65
-                    ch = chr(((ord(ch) - ord(":") + key) % 7) + ord(":"))
-                """
                 acc += ch
-
             sentence[lines][words] = acc
     return sentence
 
@@ -60,13 +46,11 @@ def caesar_cipher_encrypt(source_file: str,
     try:
         file_lines = []
         with open(source_file, 'r') as read_file:
-
             for lines in read_file:
                 file_lines.append(lines.split())
             file_lines = caesar_cipher_helper(file_lines, key)
 
         with open(encrypted_file, 'w+') as write_file:
-
             for lines in file_lines:
                 for word in lines:
                     write_file.write(word + ' ')
